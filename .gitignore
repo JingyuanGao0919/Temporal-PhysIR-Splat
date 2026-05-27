@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.idea/
+
+# Raw datasets and complete experiment outputs are intentionally not uploaded.
+dataset/
+output/
+
+# Keep representative README assets tracked.
+!assets/
+!assets/rhd_results/
+!assets/rhd_results/*.png
+!assets/rhd_results/metadata.json
+
+*.log
+*.tmp
