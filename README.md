@@ -28,10 +28,6 @@ All methods use **512 × 410** images and share the split, released COLMAP camer
 
 Time is measured in seconds from the first valid frame, preserving the recorded sampling intervals. Where normalized time is required, use `u_i = (t_i - t_0) / (t_(n-1) - t_0)`. Future test timestamps consequently exceed 1; do not clamp them or normalize by the full sequence duration.
 
-Hyperparameters are selected using a chronological validation split entirely within the training set: the first `floor(0.8n)` training frames are used for fitting and the remaining training frames for validation. During validation, time normalization uses only the fitting subset's time span. After selection, retrain on all `n` training frames with seed 0 and a fixed, method-specific training budget; Temporal PhysIR-Splat uses **8,000 iterations**. Evaluate the final model without fitting to test images or selecting checkpoints on test performance.
-
-Compute PSNR, SSIM, and VGG-based LPIPS on the full-resolution, 8-bit rendered thermal images and corresponding ground truth, represented as RGB tensors in `[0,1]`. Follow the original ETGS evaluation convention for LPIPS: pass `[0,1]` inputs directly, without an additional remapping to `[-1,1]`. Average metrics over test images within each scene, then take the equally weighted mean over the ten scenes.
-
 ## Acknowledgements
 
 This work builds on 3D Gaussian Splatting infrastructure and is inspired by recent thermal 3DGS work. We thank the authors of:
