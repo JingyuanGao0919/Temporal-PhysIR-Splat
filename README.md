@@ -2,9 +2,9 @@
 
 ## Method Overview
 
-Temporal PhysIR-Splat extends **PhysIR-Splat: Physically Consistent Thermal Infrared Radiative Transfer in 3D Gaussian Splatting** to dynamic thermal-image synthesis. Given scene geometry, target cameras, and timestamps, it represents a scene with 3D Gaussian primitives and models a continuous, time-varying thermal field. Gaussians assigned to the same material group share a time-invariant effective in-band emissivity, while their thermal states evolve over time.
+Temporal PhysIR-Splat extends PhysIR-Splat to continuous-time thermal-field reconstruction. Geometry, material assignments, material-shared effective in-band emissivity, effective IR optical thickness, and the environmental thermal field remain time-invariant within a sequence; only Gaussian temperatures evolve. Each temperature follows equivalent first-order thermal dynamics with a Gaussian-specific time constant and a low-rank harmonic equilibrium-temperature offset. Shared temporal modes and Gaussian-specific weights couple the thermal evolution across Gaussians, while a closed-form solution supports evaluation at arbitrary timestamps without numerical ODE integration.
 
-The infrared image-formation chain combines thermal self-emission and reflected ambient radiation, accounts for atmospheric transmission, composites the Gaussian contributions according to visibility, and maps the resulting radiance to the dataset's temperature encoding. A jointly trained image-space residual complements the physical rendering. The model is optimized from training thermal observations and queried directly at future timestamps, without test-time optimization.
+The same environmental temperature governs thermal relaxation and the isotropic component of ambient reflection. Time-varying temperatures enter the original PhysIR-Splat renderer through Planck-based self-emission, combined with ambient reflection, atmospheric transmittance, infrared opacity and visibility compositing, and a monotonic radiometric response. The model is fitted to training observations and evaluated at future timestamps without test-time optimization.
 
 ## CFE-20 Evaluation Protocol
 
